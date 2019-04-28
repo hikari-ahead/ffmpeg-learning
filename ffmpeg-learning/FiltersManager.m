@@ -33,7 +33,7 @@ static int64_t last_pts = AV_NOPTS_VALUE;
 @end
 
 
-const char *filter_descr = "scale=78:24,transpose=cclock";
+char *filter_descr = "";
 static int open_input_file(const char *filename)
 {
     int ret;
@@ -178,16 +178,16 @@ static void display_frame(const AVFrame *frame, AVRational time_base)
     }
 
     /* Trivial ASCII grayscale display. */
-    p0 = frame->data[0];
-    puts("\033c");
-    for (y = 0; y < frame->height; y++) {
-        p = p0;
-        for (x = 0; x < frame->width; x++)
-            putchar(" .-+#"[*(p++) / 52]);
-        putchar('\n');
-        p0 += frame->linesize[0];
-    }
-    fflush(stdout);
+//    p0 = frame->data[0];
+//    puts("\033c");
+//    for (y = 0; y < frame->height; y++) {
+//        p = p0;
+//        for (x = 0; x < frame->width; x++)
+//            putchar(" .-+#"[*(p++) / 52]);
+//        putchar('\n');
+//        p0 += frame->linesize[0];
+//    }
+//    fflush(stdout);
 }
 
 AVFrame *internal_main(char *filePath)
@@ -278,10 +278,19 @@ end:
 }
 
 - (void)commonSetup {
+
+}
+
+- (void)setFilterName:(NSString *)filterName {
+    filter_descr = filterName.UTF8String;
+}
+
+- (UIImage *)imageFromFilter {
     NSString *path = [NSBundle.mainBundle pathForResource:@"a5" ofType:@"jpg"];
     AVFrame *frame = internal_main(path.UTF8String);
     UIImage *image = [self converUIImageFromAVFrame:frame];
     free(frame);
+    return image;
 }
 
 - (CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(AVFrame *)avframe {

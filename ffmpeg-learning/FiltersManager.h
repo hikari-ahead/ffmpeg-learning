@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FiltersManager : NSObject
 @property (nonatomic, copy) NSString *filterName;
+- (UIImage *)imageFromFilter;
 @end
 
 NS_ASSUME_NONNULL_END

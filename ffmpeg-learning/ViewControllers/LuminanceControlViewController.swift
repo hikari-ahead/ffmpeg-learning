@@ -29,6 +29,8 @@ class LuminanceControlViewController: OneSlideBaseViewController {
         linearSwitch.frame = CGRect.init(x: slide.frame.origin.x, y: top, width: 100.0, height: 44.0);
         linearSwitch.addTarget(self, action: #selector(switchValueChanged(sender:)), for: UIControl.Event.valueChanged);
         view.addSubview(linearSwitch);
+        mgr.filterName = "eq=brightness=0.05";
+        imageView.image = mgr.imageFromFilter();
     }
 
     final override func slideValueChanged(sender: UISlider) {

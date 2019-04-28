@@ -29,6 +29,8 @@
 		820F233822731B6300D530B7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 820F233722731B6300D530B7 /* VideoToolbox.framework */; };
 		820F233E22731BED00D530B7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 820F233D22731BED00D530B7 /* AudioToolbox.framework */; };
 		820F233F22731C0200D530B7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 820F233922731B9600D530B7 /* CoreMedia.framework */; };
+		82404AEF2275D2E20013AA10 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82404AEE2275D2E20013AA10 /* libx264.a */; };
+		82404AF12275D4870013AA10 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82404AF02275D4870013AA10 /* libpostproc.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,6 +171,10 @@
 		820F233722731B6300D530B7 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		820F233922731B9600D530B7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		820F233D22731BED00D530B7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		82404AEB2275D2E20013AA10 /* x264_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264_config.h; sourceTree = "<group>"; };
+		82404AEC2275D2E20013AA10 /* x264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264.h; sourceTree = "<group>"; };
+		82404AEE2275D2E20013AA10 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
+		82404AF02275D4870013AA10 /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpostproc.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,8 @@
 				820F233422731AEC00D530B7 /* libbz2.tbd in Frameworks */,
 				820F233222731A7C00D530B7 /* libz.tbd in Frameworks */,
 				820F228B2272BB0F00D530B7 /* libavcodec.a in Frameworks */,
+				82404AF12275D4870013AA10 /* libpostproc.a in Frameworks */,
+				82404AEF2275D2E20013AA10 /* libx264.a in Frameworks */,
 				820F228C2272BB0F00D530B7 /* libavdevice.a in Frameworks */,
 				820F228D2272BB0F00D530B7 /* libavfilter.a in Frameworks */,
 				820F228E2272BB0F00D530B7 /* libavformat.a in Frameworks */,
@@ -239,6 +247,7 @@
 				820F233522731B4300D530B7 /* libiconv.2.tbd */,
 				820F23142273130800D530B7 /* libz.tbd */,
 				820F23122273130200D530B7 /* libbz2.tbd */,
+				82404AE92275D2E20013AA10 /* fat-x264 */,
 				820F220B2272BB0400D530B7 /* FFmpeg-iOS */,
 			);
 			name = Frameworks;
@@ -431,6 +440,7 @@
 		820F22832272BB0400D530B7 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				82404AF02275D4870013AA10 /* libpostproc.a */,
 				820F22842272BB0400D530B7 /* libavutil.a */,
 				820F22852272BB0400D530B7 /* libavfilter.a */,
 				820F22862272BB0400D530B7 /* libavcodec.a */,
@@ -449,6 +459,32 @@
 				820F230A2272BE2D00D530B7 /* LuminanceControlViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		82404AE92275D2E20013AA10 /* fat-x264 */ = {
+			isa = PBXGroup;
+			children = (
+				82404AEA2275D2E20013AA10 /* include */,
+				82404AED2275D2E20013AA10 /* lib */,
+			);
+			path = "fat-x264";
+			sourceTree = "<group>";
+		};
+		82404AEA2275D2E20013AA10 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				82404AEB2275D2E20013AA10 /* x264_config.h */,
+				82404AEC2275D2E20013AA10 /* x264.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		82404AED2275D2E20013AA10 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				82404AEE2275D2E20013AA10 /* libx264.a */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -687,6 +723,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/3Party/FFmpeg-iOS/lib",
+					"$(PROJECT_DIR)/fat-x264/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "resober.ffmpeg-learning";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -714,6 +751,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/3Party/FFmpeg-iOS/lib",
+					"$(PROJECT_DIR)/fat-x264/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "resober.ffmpeg-learning";
 				PRODUCT_NAME = "$(TARGET_NAME)";
